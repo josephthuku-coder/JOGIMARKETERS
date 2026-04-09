@@ -23,9 +23,9 @@ service cloud.firestore {
       return request.auth.token.premium == true;
     }
 
-    // PRODUCTS - Multi-vendor marketplace security
+    // PRODUCTS - Multi-vendor product management with marketplace security
     match /products/{productId} {
-      // Public read access for marketplace browsing
+      // Public read for marketplace browsing
       allow read: if true;
       
       // Create: Only authenticated users can create products with validation
@@ -54,10 +54,8 @@ service cloud.firestore {
     
     // USERS - User profile management with marketplace roles
     match /users/{userId} {
-      // Public read for approved shops (marketplace browsing)
-      allow read: if isSignedIn() && 
-                      resource.data.status == 'approved' &&
-                      resource.data.accountType in ['basic', 'premium'];
+      // Public read for marketplace browsing
+      allow read: if true;
       
       // Users can only update their own profile
       allow update: if isOwner(userId);
