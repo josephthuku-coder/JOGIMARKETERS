@@ -71,8 +71,8 @@ service cloud.firestore {
     
     // SHOP PROFILES - Enhanced marketplace shop security
     match /shops/{shopId} {
-      // Public read for approved shops
-      allow read: if resource.data.status == 'approved';
+      // Public read for marketplace browsing
+      allow read: if true;
       
       // Shop owners can update their shop
       allow update: if isShopOwner(shopId) &&
@@ -107,9 +107,8 @@ service cloud.firestore {
     
     // ANALYTICS - Shop-specific analytics with privacy
     match /analytics/{docId} {
-      // Shop owners can only read their analytics
-      allow read: if isSignedIn() && 
-                      resource.data.shopId == request.auth.uid;
+      // Public read for marketplace statistics
+      allow read: if true;
       
       // System and user actions can create analytics
       allow create: if isSignedIn() && 
