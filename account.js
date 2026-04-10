@@ -1410,9 +1410,9 @@ class AccountManager {
                 };
             }
             
-            // Production: Try actual M-Pesa API
+            // Production: Use actual M-Pesa API endpoint
             console.log('🔍 Attempting real M-Pesa API call...');
-            const response = await fetch('http://localhost:3000/api/mpesa/stkpush', {
+            const response = await fetch('https://your-production-mpesa-api.com/api/mpesa/stkpush', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
